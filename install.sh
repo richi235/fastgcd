@@ -12,7 +12,7 @@ then
 
     if [ ! -f gmp-5.0.5.tar.bz2 ];
     then
-        $get ftp://ftp.gmplib.org/pub/gmp-5.0.5/gmp-5.0.5.tar.bz2
+        $get ftp://ftp.gnu.org/gnu/gmp/gmp-5.0.5.tar.bz2
     fi
 
     sum=`openssl sha1 gmp-5.0.5.tar.bz2 | awk -F' ' '{print $2}'`
@@ -33,6 +33,7 @@ fi
 cd gmp-5.0.5
 patch -p 1 < ../gmp-5.0.5.patch
 mkdir ../gmp-patched
+export CC=gcc-4.9
 ./configure --prefix=$PWD/../gmp-patched/
 make
 make install
